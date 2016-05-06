@@ -1,5 +1,5 @@
 grammar ArrayInit;
 
-init  : '{' INT '}' ;
+init  : '{' INT (',' INT)* '}' ;
 INT   : [0-9]+ ;
 WS    : [ \n\r]+ -> skip ;
