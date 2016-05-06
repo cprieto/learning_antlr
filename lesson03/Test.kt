@@ -10,3 +10,18 @@ fun main(args: Array<String>) {
 
     println(tree.toStringTree(parser))
 }
+
+public class ShortToUnicode : ArrayInitBaseListener() {
+    override fun enterInit(ctx : ArrayInitParser.InitContext) {
+        println('"')
+    }
+
+    override fun exitInit(ctx: ArrayInitParser.InitContext) {
+        println('"')
+    }
+
+    override fun enterValue(ctx: ArrayInitParser.ValueContext) {
+        val value = ctx.INT().getText().toInt()
+        println("\\u%04x".format(value))
+    }
+}
