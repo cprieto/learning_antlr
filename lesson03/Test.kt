@@ -1,5 +1,6 @@
 import org.antlr.v4.runtime.ANTLRInputStream
 import org.antlr.v4.runtime.CommonTokenStream
+import org.antlr.v4.runtime.tree.ParseTreeWalker
 
 fun main(args: Array<String>) {
     val input = ANTLRInputStream(System.`in`)
@@ -8,20 +9,23 @@ fun main(args: Array<String>) {
     val parser = ArrayInitParser(tokens)
     val tree = parser.init()
 
-    println(tree.toStringTree(parser))
+    val walker = ParseTreeWalker()
+    walker.walk(ShortToUnicode(), tree)
+
+    println()
 }
 
 public class ShortToUnicode : ArrayInitBaseListener() {
     override fun enterInit(ctx : ArrayInitParser.InitContext) {
-        println('"')
+        print('"')
     }
 
     override fun exitInit(ctx: ArrayInitParser.InitContext) {
-        println('"')
+        print('"')
     }
 
     override fun enterValue(ctx: ArrayInitParser.ValueContext) {
         val value = ctx.INT().getText().toInt()
-        println("\\u%04x".format(value))
+        print("\\u%04x".format(value))
     }
 }
