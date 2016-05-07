@@ -9,3 +9,6 @@ ANTLR=/usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar
 
 clean:
 	rm -rf *.java *.class *.tokens
+
+test: %.class
+	grun Expr prog -tokens t.expr
