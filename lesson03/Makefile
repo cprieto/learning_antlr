@@ -9,11 +9,14 @@ all: Test.jar
 %.class: %.java
 	javac *.java -classpath $(ANTLR):.
 
-Test.jar: %.class
+manifest.mf:
+	echo 'Class-Path:' $(ANTLR) > manifest.mf
+
+Test.jar: %.class manifest.mf
 	kotlinc Test.kt -include-runtime -d Test.jar -classpath $(ANTLR):.
 	jar uvf Test.jar *.class *.tokens
 	jar umf manifest.mf Test.jar
-	rm *.class *.java *.tokens
+	rm *.class *.java *.tokens manifest.mf
 
 clean:
-	rm -f *.class *.java *.tokens *.jar
+	rm -f *.class *.java *.tokens *.jar *.mf

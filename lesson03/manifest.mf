@@ -1,1 +1,0 @@
-Class-Path: /usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar
