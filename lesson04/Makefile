@@ -1,5 +1,6 @@
 GRAMMAR=Expr
 ENTRY=prog
+EXTENSION=$(call lc,$(GRAMMAR))
 ANTLR=/usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar
 
 $(GRAMMAR)%.java %.tokens: $(GRAMMAR).g4
@@ -19,7 +20,7 @@ clean:
 	rm -rf *.java *.class *.tokens *.mf
 
 test: $(GRAMMAR)%.class $(GRAMMAR)%.tokens
-	grun $(GRAMMAR) (ENTRY) -tokens t.$(GRAMMAR)
+	grun $(GRAMMAR) $(ENTRY) -tokens t.$(GRAMMAR)
 
 run: $(GRAMMAR).jar
-	java -jar $(GRAMMAR).jar t.$(GRAMMAR)
+	java -jar $(GRAMMAR).jar t.$(EXTENSION)
