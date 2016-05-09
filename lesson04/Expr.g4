@@ -3,7 +3,9 @@ import CommonLexerRules;
 
 prog    : stat+ ;
 
-stat    : 'clear' NEWLINE  # clear
+CLEAR   : C L E A R ;
+
+stat    : CLEAR NEWLINE  # clear
         | expr NEWLINE     # printExpr
         | ID '=' expr      # assign
         | NEWLINE          # blank
@@ -20,3 +22,9 @@ MUL : '*' ;
 DIV : '/' ;
 ADD : '+' ;
 SUB : '-' ;
+
+fragment C: ('c'|'C') ;
+fragment L: ('l'|'L') ;
+fragment E: ('e'|'E') ;
+fragment A: ('a'|'A') ;
+fragment R: ('r'|'R') ;
