@@ -1,4 +1,3 @@
-import java.io.InputStream
 import java.io.FileInputStream
 import org.antlr.v4.runtime.ANTLRInputStream
 import org.antlr.v4.runtime.CommonTokenStream
@@ -11,5 +10,9 @@ fun main(args: Array<String>) {
     val parser = ExprParser(tokens)
     val tree = parser.prog()
 
-    println(tree.toStringTree(parser))
+    val visitor = EvalVisitor()
+    visitor.visit(tree)
+}
+
+class EvalVisitor : ExprBaseVisitor<Int>() {
 }
