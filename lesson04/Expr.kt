@@ -64,4 +64,9 @@ class EvalVisitor : ExprBaseVisitor<Int>() {
         println(value)
         return null
     }
+
+    override fun visitClear(p0: ExprParser.ClearContext?): Int? {
+        memory.clear()
+        return null
+    }
 }

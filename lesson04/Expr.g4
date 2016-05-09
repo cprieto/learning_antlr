@@ -3,9 +3,10 @@ import CommonLexerRules;
 
 prog    : stat+ ;
 
-stat    : expr NEWLINE          # printExpr
-        | ID '=' expr           # assign
-        | NEWLINE               # blank
+stat    : 'clear' NEWLINE  # clear
+        | expr NEWLINE     # printExpr
+        | ID '=' expr      # assign
+        | NEWLINE          # blank
         ;
 
 expr    : expr op=('*'|'/') expr   # MulDiv
