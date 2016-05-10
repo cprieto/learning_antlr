@@ -21,7 +21,7 @@ clean:
 	rm -rf *.java *.class *.tokens *.mf *.jar
 
 test: $(GRAMMAR)%.class $(GRAMMAR)%.tokens
-	grun $(GRAMMAR) $(ENTRY) -tokens t.$(GRAMMAR)
+	grun $(GRAMMAR) $(ENTRY) -tree t.$(GRAMMAR)
 
 run: $(GRAMMAR).jar
 	java -jar $(GRAMMAR).jar t.$(EXTENSION) $(ARGS)
