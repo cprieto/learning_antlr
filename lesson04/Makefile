@@ -1,6 +1,7 @@
 GRAMMAR=Expr
 ENTRY=prog
-EXTENSION=$(call lc,$(GRAMMAR))
+ARGS=
+EXTENSION=$(shell echo $(GRAMMAR)|tr A-Z a-z)
 ANTLR=/usr/local/Cellar/antlr/4.5.2/antlr-4.5.2-complete.jar
 
 $(GRAMMAR)%.java %.tokens: $(GRAMMAR).g4
@@ -9,7 +10,7 @@ $(GRAMMAR)%.java %.tokens: $(GRAMMAR).g4
 $(GRAMMAR)%.class: $(GRAMMAR)%.java
 	javac *.java -classpath $(ANTLR):.
 
-Expr.jar: $(GRAMMAR)%.class $(GRAMMAR)%.tokens $(GRAMMAR).kt
+$(GRAMMAR).jar: $(GRAMMAR)%.class $(GRAMMAR)%.tokens $(GRAMMAR).kt
 	kotlinc $(GRAMMAR).kt -include-runtime -classpath $(ANTLR):. -d $(GRAMMAR).jar
 	echo 'Class-Path:' $(ANTLR) > manifest.mf
 	jar uvf $(GRAMMAR).jar $(GRAMMAR)*.class $(GRAMMAR)*.tokens
@@ -23,4 +24,4 @@ test: $(GRAMMAR)%.class $(GRAMMAR)%.tokens
 	grun $(GRAMMAR) $(ENTRY) -tokens t.$(GRAMMAR)
 
 run: $(GRAMMAR).jar
-	java -jar $(GRAMMAR).jar t.$(EXTENSION)
+	java -jar $(GRAMMAR).jar t.$(EXTENSION) $(ARGS)
