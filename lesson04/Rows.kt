@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
     val input = ANTLRInputStream(inputStream)
     val lexer = RowsLexer(input)
     val tokens = CommonTokenStream(lexer)
-    val col = args[1]?.toInt() ?: 0
+    val col = if (args.size > 1) args[1].toInt() else 0
     val parser = RowsParser(tokens, col)
     parser.setBuildParseTree(false)
 

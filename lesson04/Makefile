@@ -18,7 +18,7 @@ $(GRAMMAR).jar: $(GRAMMAR)%.class $(GRAMMAR)%.tokens $(GRAMMAR).kt
 	rm -f *.java *.class *.tokens *.mf
 
 clean:
-	rm -rf *.java *.class *.tokens *.mf
+	rm -rf *.java *.class *.tokens *.mf *.jar
 
 test: $(GRAMMAR)%.class $(GRAMMAR)%.tokens
 	grun $(GRAMMAR) $(ENTRY) -tokens t.$(GRAMMAR)
