@@ -6,7 +6,9 @@ entry : expr NL # printResult
       | NL      # blank
       ;
 
-expr : expr op=('+'|'-') expr  # AddSub
+expr : expr '^' expr           # Power
+     | expr op=('*'|'/') expr  # MulDiv
+     | expr op=('+'|'-') expr  # AddSub
      | INT                     # Num
      ;
 
@@ -17,3 +19,5 @@ WS  : [\t ] -> skip ;
 
 SUM : '+' ;
 SUB : '-' ;
+MUL : '*' ;
+DIV : '/' ;

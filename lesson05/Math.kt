@@ -31,4 +31,18 @@ class MathEvalVisitor : MathBaseVisitor<Int?>() {
 
         return if (ctx?.op!!.type == MathParser.SUM) left + right else left - right
     }
+
+    override fun visitMulDiv(ctx: MathParser.MulDivContext?): Int? {
+        val left  = visit(ctx?.expr(0))!!
+        val right = visit(ctx?.expr(1))!!
+
+        return if (ctx?.op!!.type == MathParser.MUL) left * right else left / right
+    }
+
+    override fun visitPower(ctx: MathParser.PowerContext?): Int? {
+        val left = visit(ctx?.expr(0))!!
+        val right = visit(ctx?.expr(1))!!
+
+        return Math.pow(left.toDouble(), right.toDouble()).toInt()
+    }
 }
