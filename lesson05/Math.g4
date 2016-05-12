@@ -2,11 +2,14 @@ grammar Math;
 
 math: entry+ ;
 
-entry : expr NL
-      | NL
+entry : expr NL # printResult
+      | NL      # blank
       ;
 
-expr : INT ;
+expr : expr '+' expr  # Sum
+     | INT            # Num
+     ;
+
 
 INT : [0-9]+ ;
 NL  : '\r'? '\n' ;
