@@ -6,10 +6,10 @@ entry : expr NL # printResult
       | NL      # blank
       ;
 
-expr : expr '^' expr           # Power
-     | expr op=('*'|'/') expr  # MulDiv
-     | expr op=('+'|'-') expr  # AddSub
-     | INT                     # Num
+expr : <assoc=right> expr '^' expr # Power
+     | expr op=('*'|'/') expr      # MulDiv
+     | expr op=('+'|'-') expr      # AddSub
+     | INT                         # Num
      ;
 
 
