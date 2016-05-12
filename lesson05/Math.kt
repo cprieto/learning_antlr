@@ -25,10 +25,10 @@ class MathEvalVisitor : MathBaseVisitor<Int?>() {
         return ctx?.INT()?.text?.toInt()
     }
 
-    override fun visitSum(ctx: MathParser.SumContext?): Int? {
+    override fun visitAddSub(ctx: MathParser.AddSubContext?): Int? {
         val left  = visit(ctx?.expr(0))!!
         val right = visit(ctx?.expr(1))!!
 
-        return left + right
+        return if (ctx?.op!!.type == MathParser.SUM) left + right else left - right
     }
 }
