@@ -4,7 +4,7 @@ file   : hdr row+ ;
 
 hdr    : row ;
 
-row    : field (',' field)* NL ;
+row    : field (',' field)* '\r'? '\n' ;
 
 field  : TEXT
        | STRING
@@ -14,5 +14,3 @@ field  : TEXT
 TEXT   : ~[,\n\r"]+ ;
 
 STRING : '"' ('""'|~'"')* '"' ;
-
-fragment NL    : '\r'? '\n' ;
