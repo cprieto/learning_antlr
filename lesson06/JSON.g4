@@ -2,6 +2,14 @@ grammar JSON;
 
 json : object ;
 
-object : '{' '}' ; // empty object
+object : '{' pair '}'
+       | '{' '}' ; // empty object
 
-NL : [\n\r] -> skip;
+
+pair : STRING ':' value ;
+
+value : object ; // Recursive rule!
+
+STRING : '"' (~["])* '"' ;
+
+NL : [\n\r ] -> skip;
