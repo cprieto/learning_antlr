@@ -8,7 +8,8 @@ object : '{' pair '}'
 
 pair : STRING ':' value ;
 
-value : object ; // Recursive rule!
+value : STRING
+      | object ; // Recursive rule!
 
 STRING : '"' (~["])* '"' ;
 
