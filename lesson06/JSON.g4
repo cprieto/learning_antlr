@@ -2,7 +2,7 @@ grammar JSON;
 
 json : object ;
 
-object : '{' pair '}'
+object : '{' pair (',' pair)* '}'
        | '{' '}' ; // empty object
 
 

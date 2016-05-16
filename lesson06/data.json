@@ -1,3 +1,5 @@
 {
-  "key": -12
+  "key": -12,
+  "another key": "with text value",
+  "obj": {}
 }
