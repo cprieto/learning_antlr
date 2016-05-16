@@ -19,12 +19,18 @@ value : STRING
 array : '[' value (',' value)* ']'
       | '[' ']' ; // empty array
 
-STRING : '"' (~["\\])* '"' ;
+STRING : '"' (ESC | ~["\\])* '"' ;
 
-NUMBER : '-'? INT
-       | '-'? INT '.' [0-9]+  // float numbers
+NUMBER : '-'? INT '.' [0-9]+  EXP? // 1.35, 1.35e-9
+       | '-'? INT EXP // 13e45, -12e-34
+       | '-'? INT //122, -12
        ;
 
-fragment INT   : '0' | [1-9] [0-9]* ; // No leading zeroes!
+fragment INT     : '0' | [1-9] [0-9]* ; // No leading zeroes!
+fragment EXP     : [Ee] [+\-]? INT ;
 
-NL : [\n\r ] -> skip;
+fragment ESC     : '\\' (["\\/bfnrt] | UNICODE) ;
+fragment UNICODE : 'u' HEX HEX HEX HEX ;
+fragment HEX     : [0-9a-fA-F] ;
+
+WS : [\t\n\r ]+ -> skip;
